@@ -1,0 +1,16 @@
+version: '2.3'
+services:
+  rtorrent-magnet-convert:
+    container_name: rtorrent-magnet-convert
+    image: rtorrent-magnet-convert
+    # Change this to the unix uid and gid which rTorrent is running as
+    user: $USERID:$GROUPID
+    build:
+      context: '.'
+      dockerfile: Dockerfile
+    volumes:
+      # Change `/path/to/watch/folder` to the path where rTorrent is watching for .torrent files
+      - /path/to/watch/folder:/watched
+    environment:
+      DIRECTORY: /watched
+      PERMISSION: 0664
